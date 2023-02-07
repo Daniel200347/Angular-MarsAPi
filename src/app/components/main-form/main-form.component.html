@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="form">
+    <mat-form-field class="menu" appearance="fill">
+      <mat-label>Input</mat-label>
+      <input matInput [(ngModel)]="sol">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Select</mat-label>
+      <mat-select [(ngModel)]="camera">
+        <mat-option *ngFor="let roverCamera of roverCameras"
+                    value="{{roverCamera.code}}">{{roverCamera.value}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button class="button" *ngIf="isSubmitBtnDisabled" (click)="onSubmit()">Отправить</button>
+  </div>
+  <div class="cards">
+    <div *ngIf="loading" class="spiner">
+      <mat-spinner></mat-spinner>
+    </div>
+    <div *ngIf="isEmptyData()" class="spiner">
+      <h2>Ничего не найдено :(</h2>
+    </div>
+    <div class="card">
+      <mat-card class="image-wrapper" *ngFor="let photo of photos">
+        <img class="image" mat-card-image src="{{photo.img_src}}">
+        <mat-card-content class="image-title"><span [style]="{color:''}">Rovers name:</span>{{photo.rover.name}}
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
